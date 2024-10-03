@@ -1,10 +1,11 @@
 package v1alpha1
 
 import (
-	"github.com/khulnasoft/starboard/pkg/apis/khulnasoft"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+
+	"github.com/khulnasoft/starboard/pkg/apis/khulnasoft"
 )
 
 // SchemeGroupVersion is group version used to register these objects
@@ -32,20 +33,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&VulnerabilityReport{},
 		&VulnerabilityReportList{},
-		&ClusterVulnerabilityReport{},
-		&ClusterVulnerabilityReportList{},
 		&CISKubeBenchReport{},
 		&CISKubeBenchReportList{},
 		&KubeHunterReport{},
 		&KubeHunterReportList{},
 		&ConfigAuditReport{},
 		&ConfigAuditReportList{},
-		&ClusterConfigAuditReport{},
-		&ClusterConfigAuditReportList{},
-		&ClusterComplianceReport{},
-		&ClusterComplianceReportList{},
-		&ClusterComplianceDetailReport{},
-		&ClusterComplianceDetailReportList{},
 	)
 	meta.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

@@ -4,7 +4,8 @@ TEST_PATTERN?=.
 export GO111MODULE := on
 
 setup:
-	go mod tidy
+	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
+	go mod download
 .PHONY: setup
 
 build:
@@ -20,14 +21,14 @@ cover: test
 .PHONY: cover
 
 fmt:
-	gofumpt -w -l .
+	find . -name '*.go' -not -wholename './vendor/*' | while read -r file; do gofmt -w -s "$$file"; goimports -w "$$file"; done
 .PHONY: fmt
 
 lint:
-	golangci-lint run ./...
+	./bin/golangci-lint run ./...
 .PHONY: lint
 
-ci: build test
+ci: build test lint
 .PHONY: ci
 
 card:
